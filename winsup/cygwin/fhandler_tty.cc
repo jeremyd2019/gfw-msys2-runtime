@@ -479,11 +479,9 @@ void
 fhandler_pty_master::doecho (const void *str, DWORD len)
 {
   ssize_t towrite = len;
-  acquire_output_mutex (INFINITE);
   if (!process_opost_output (echo_w, str, towrite, true,
 			     get_ttyp (), is_nonblocking ()))
     termios_printf ("Write to echo pipe failed, %E");
-  release_output_mutex ();
 }
 
 int
